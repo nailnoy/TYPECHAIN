@@ -1,3 +1,4 @@
+//HashKey를 발급받기위해 crypto-js를 사용
 import * as CryptoJS from "crypto-js";
 
 class Block {
@@ -35,12 +36,36 @@ class Block {
 
   const getBlockchain = (): Block[] => blockchain;
 
+  ////블록체인 배열안에 있는 최신 블록을 가져오는 함수
   const getLatestBlock = (): Block => blockchain[blockchain.length - 1];
-
+  
+  //새로운 timestamp를 받아오는 함수
   const getNewTimeStamp = (): number => Math.round(new Date().getTime() / 1000);
+
+  const createNewBlock = (data: string): Block => {
+    const previosBlock: Block = getLatestBlock();
+    const newIndex: number = previosBlock.index + 1;
+    const newTimestamp: number = getNewTimeStamp();
+    const newHash: string = Block.calculateBlockHash(
+      newIndex,
+      previosBlock.hash,
+      newTimestamp,
+      data
+    );
+    const newBlock: Block = new Block(
+      newIndex,
+      newHash,
+      previosBlock.hash,
+      data,
+      newTimestamp
+    );
+    return newBlock;
+  };
 
 
   //blockchain.push("stuff"); class Block의 구조를 지키지않았기때문에 실행 X
-  console.log(blockchain);
+
+  console.log(createNewBlock("Hi"));
+  console.log(createNewBlock("umm"));
   
   export {};
