@@ -1,16 +1,14 @@
 {
-  "name": "typechain",
-  "version": "1.0.0",
-  "description": "Learning Typescript by making a Blockchain with it",
-  "main": "index.js",
-  "repository": "https://github.com/nailnoy/TYPECHAIN",
-  "author": "ZoMD",
-  "license": "MIT",
-  "scripts": {
-    "start": "node index.js",
-    "prestart": "tsc"
-  },
-  "devDependencies": {
-    "tsc-watch": "^4.6.0"
+    "name": "typechain",
+    "version": "1.0.0",
+    "description": "Learning Typescript by making a Blockchain with it",
+    "main": "index.js",
+    "repository": "https://github.com/nailnoy/TYPECHAIN",
+    "author": "ZoMD",
+    "license": "MIT",
+    "scripts": {
+      "start": "node index.js",
+      "prestart": "tsc"
+    }
   }
-}
+    
