@@ -1,15 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Human {
-    constructor(name, age, gender) {
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
+class Block {
+    constructor(index, hash, previousHash, data, timestamp) {
+        this.index = index;
+        this.hash = hash;
+        this.previousHash = previousHash;
+        this.data = data;
+        this.timestamp = timestamp;
     }
-} // TS 측면에선 nterface 더 안전하나 다른 프레임워크를 사용할 땐 class를 사용해야함
-const zomd = new Human("ZoMD", 25, "male");
-const sayHi = (person) => {
-    return `Hello ${person.name}, you are ${person.age}, you are a ${person.gender}!`;
-};
-console.log(sayHi(zomd));
+}
+const genesisBlock = new Block(0, "20220217", "", "ZoMD", 123456);
+let blockchain = [genesisBlock];
+//blockchain.push("stuff"); class Block의 구조를 지키지않았기때문에 실행 X
+console.log(blockchain);
 //# sourceMappingURL=index.js.map
