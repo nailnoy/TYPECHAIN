@@ -68,11 +68,18 @@ class Block {
       data,
       newTimestamp
     );
+    addBlock(newBlock);
     return newBlock;
   };
 
+  const getHashforBlock = (aBlock: Block): string =>
+  Block.calculateBlockHash(
+    aBlock.index,
+    aBlock.previousHash,
+    aBlock.timestamp,
+    aBlock.data
+  );
 
-  //blockchain.push("stuff"); class Block의 구조를 지키지않았기때문에 실행 X
 
    // 블록이 유효한지 체크하는 함수
   const isBlockValid = (candidateBlock : Block, previousBlock : Block) : boolean => {
@@ -85,7 +92,26 @@ class Block {
     } //이전 블록의 해쉬와 현재 블록의 이전해쉬가 같은지 체크
     else if(previousBlock.hash !== candidateBlock.previousHash){
         return false;
-    } 
+        //현재 블록의 해쉬키와 현재블록이 가지고 있는 해쉬키가 같은지 체크
+    } else if (getHashforBlock(candidateBlock) !== candidateBlock.hash) {
+        return false;
+        //검증을 통과하면 true
+      } else {
+        return true;
+      }
+    };
+    
+    // 블록을 추가하는 함수(그 값이 true라면 블록체인 배열에 push로 넣는다.)
+    const addBlock = (candidateBlock: Block): void => {
+      if (isBlockValid(candidateBlock, getLatestBlock())) {
+        blockchain.push(candidateBlock);
+    }
 };
+
+createNewBlock("second block");
+createNewBlock("third block");
+createNewBlock("fourth block");
+
+ console.log(blockchain);
   
   export {};
